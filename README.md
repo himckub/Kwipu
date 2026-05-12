@@ -10,20 +10,20 @@ Built for [Obsidian](https://obsidian.md/) vaults but works with any folder of m
 
 ## Features
 
-- **Property Graph Index** — builds a knowledge graph from your notes using LLM-extracted relationships
-- **Obsidian-native** — automatically parses `[[wikilinks]]` and YAML frontmatter into structured graph triples
-- **Multilingual** — supports Italian, English, French, German, Spanish, Portuguese (auto-detected)
-- **Hybrid retrieval** — combines 4 retrieval strategies:
+- **Property Graph Index** - builds a knowledge graph from your notes using LLM-extracted relationships
+- **Obsidian-native** - automatically parses `[[wikilinks]]` and YAML frontmatter into structured graph triples
+- **Multilingual** - supports Italian, English, French, German, Spanish, Portuguese (auto-detected)
+- **Hybrid retrieval** - combines 4 retrieval strategies:
   - LLM synonym expansion (optional, disable with `--fast`)
   - Vector similarity search
   - BM25 keyword scoring
   - Temporal/metadata matching
-- **Real-time sync** — watches your folder for changes and updates the graph incrementally
-- **Anti-hallucination prompt** — strict instructions to cite sources and avoid inventing facts
-- **Fully local** — runs on Ollama, no data leaves your machine
-- **Startup checks** — verifies Ollama is running and models are available before starting
-- **Storage validation** — detects embedding model mismatches to prevent silent corruption
-- **CLI model override** — switch models without editing code via `--llm-model` and `--embed-model`
+- **Real-time sync** - watches your folder for changes and updates the graph incrementally
+- **Anti-hallucination prompt** - strict instructions to cite sources and avoid inventing facts
+- **Fully local** - runs on Ollama, no data leaves your machine
+- **Startup checks** - verifies Ollama is running and models are available before starting
+- **Storage validation** - detects embedding model mismatches to prevent silent corruption
+- **CLI model override** - switch models without editing code via `--llm-model` and `--embed-model`
 
 ## Requirements
 
@@ -166,13 +166,13 @@ python geode_graph.py --llm-model gpt-oss:20b-cloud
 python geode_graph.py --llm-model qwen2.5:3b --fast
 ```
 
-This gives you the best of both worlds: a high-quality graph built by a 20B+ model, with fast and lightweight queries on a 3B model. The graph structure (entities, relations, triples) doesn't change when you switch models — only the response generation uses the smaller model.
+This gives you the best of both worlds: a high-quality graph built by a 20B+ model, with fast and lightweight queries on a 3B model. The graph structure (entities, relations, triples) doesn't change when you switch models - only the response generation uses the smaller model.
 
 > **Note:** If you change the embedding model (`--embed-model`), you must delete `storage_graph/` and rebuild. Kwipu will detect the mismatch and warn you.
 
 ## Roadmap
 
-- **Telegram Bot** — Query your Obsidian vault or knowledge base from anywhere via Telegram
+- **Telegram Bot** - Query your Obsidian vault or knowledge base from anywhere via Telegram
 
 ## License
 

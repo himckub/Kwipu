@@ -176,6 +176,34 @@ This gives you the best of both worlds: a high-quality graph built by a 20B+ mod
 
 > **Note:** If you change the embedding model (`--embed-model`), you must delete `storage_graph/` and rebuild. Kwipu will detect the mismatch and warn you.
 
+## Contributing
+
+Contributions are welcome. Here's how to get started:
+
+```bash
+# Clone and setup
+git clone https://github.com/benmaster82/Kwipu.git
+cd Kwipu
+pip install -r requirements.txt
+```
+
+**Areas where help is needed:**
+
+- **Retriever attribution logging** - Log which retriever (vector, BM25, temporal, synonym) contributed context for each answer
+- **Evaluation set** - Build a categorized test suite (exact-source, multi-hop, temporal, negative questions)
+- **Provenance inspector** - Surface the chain: answer claim -> cited note -> extracted entity/edge
+- **Telegram bot integration** - Query the knowledge base remotely via Telegram
+- **Performance** - Incremental update on file modification (currently triggers full rebuild)
+
+**Guidelines:**
+
+- Keep it simple. This is a local-first tool, not an enterprise platform.
+- Test with real Obsidian vaults when possible.
+- One feature per PR. Small PRs get reviewed faster.
+- English for code, comments, and commit messages.
+
+Open an issue first if you want to discuss an approach before coding.
+
 ## Roadmap
 
 - **Telegram Bot** - Query your Obsidian vault or knowledge base from anywhere via Telegram

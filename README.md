@@ -14,6 +14,14 @@ Built for [Obsidian](https://obsidian.md/) vaults but works with any folder of m
 
 ![Query response example](img/screen_2.png)
 
+## What's New
+
+- **Incremental updates** - editing a note no longer rebuilds the entire graph. Modified files are updated in-place in seconds.
+- **CLI model override** - switch LLM or embedding model without editing code: `--llm-model`, `--embed-model`
+- **Startup validation** - checks that Ollama is running and models are available before starting. Clear error messages with suggested commands.
+- **Storage integrity** - detects embedding model mismatches to prevent silent corruption of the graph.
+- **Refined prompt** - rewritten anti-hallucination rules reduce false information while keeping answers complete.
+
 ## Features
 
 - **Property Graph Index** - builds a knowledge graph from your notes using LLM-extracted relationships

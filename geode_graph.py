@@ -564,12 +564,19 @@ def _deduplicate_triples(
 # GRAPH RAG ENGINE
 # ==========================================
 class WritHerGraphRAG:
-    def __init__(self, fast_mode=False):
+    def __init__(
+        self,
+        fast_mode: bool = False,
+        model_name: str = MODEL_NAME,
+        embed_model: str = EMBED_MODEL,
+    ) -> None:
         self.index = None
         self._rw_lock = ReadWriteLock()
         self._query_engine = None
         self._retrievers_dirty = True
         self._fast_mode = fast_mode
+        self.model_name = model_name
+        self.embed_model = embed_model
         if not os.path.exists(KNOWLEDGE_DIR):
             os.makedirs(KNOWLEDGE_DIR)
         self.load_or_build_index()
@@ -615,7 +622,7 @@ class WritHerGraphRAG:
             return
 
         stored_embed = meta.get("embed_model", "")
-        current_embed = EMBED_MODEL
+        current_embed = self.embed_model
 
         if stored_embed and stored_embed != current_embed:
             raise RuntimeError(
@@ -626,10 +633,10 @@ class WritHerGraphRAG:
 
         # LLM model change is fine (only used for generation, not embeddings)
         stored_llm = meta.get("llm_model", "")
-        if stored_llm and stored_llm != MODEL_NAME:
+        if stored_llm and stored_llm != self.model_name:
             safe_print(
                 f"[dim]Note: graph was built with '{stored_llm}', "
-                f"now using '{MODEL_NAME}' for queries.[/dim]"
+                f"now using '{self.model_name}' for queries.[/dim]"
             )
 
     def _save_storage_manifest(self):
@@ -638,8 +645,8 @@ class WritHerGraphRAG:
 
         meta_path = os.path.join(STORAGE_DIR, ".kwipu_meta.json")
         meta = {
-            "embed_model": EMBED_MODEL,
-            "llm_model": MODEL_NAME,
+            "embed_model": self.embed_model,
+            "llm_model": self.model_name,
             "version": "1.0",
         }
         try:
@@ -785,7 +792,7 @@ class WritHerGraphRAG:
 
         build_start = time.time()
         safe_print(
-            f"LLM extraction and graph construction with {MODEL_NAME}..."
+            f"LLM extraction and graph construction with {self.model_name}..."
         )
 
         def parse_triplets(response_str, max_length=128):
@@ -1212,7 +1219,11 @@ def main():
     )
 
     with Status("[dim]Loading knowledge graph...[/dim]", console=console, spinner="dots"):
-        rag = WritHerGraphRAG(fast_mode=args.fast)
+        rag = WritHerGraphRAG(
+            fast_mode=args.fast,
+            model_name=llm_model,
+            embed_model=embed_model,
+        )
 
     observer = Observer()
     observer.schedule(FileWatcher(rag), KNOWLEDGE_DIR, recursive=True)

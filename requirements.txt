@@ -5,3 +5,4 @@ watchdog
 nest-asyncio
 pyyaml
 rich
+mcp

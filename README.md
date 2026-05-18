@@ -60,6 +60,25 @@ ollama pull llama3.1:8b
 ollama pull nomic-embed-text
 ```
 
+## MCP Server (Claude Desktop, Cursor, Windsurf)
+
+Kwipu can run as an MCP server, allowing AI agents to query your knowledge graph directly. All processing happens locally via Ollama - the agent only sends the question and receives the answer.
+
+Add to your `claude_desktop_config.json` (or equivalent MCP config):
+
+```json
+{
+  "mcpServers": {
+    "kwipu": {
+      "command": "C:/path/to/python.exe",
+      "args": ["C:/path/to/kwipu_mcp_server.py"]
+    }
+  }
+}
+```
+
+Replace paths with your actual Python and project locations. Requires Ollama running with the configured model.
+
 ## Usage
 
 ```bash
@@ -117,7 +136,8 @@ Your Notes (.md)
 ## Project Structure
 
 ```
-├── geode_graph.py       # Main application
+├── geode_graph.py       # Main application (terminal interface)
+├── kwipu_mcp_server.py  # MCP server for AI agent integration
 ├── lang_config.py       # Multilingual configuration (stopwords, patterns, relations)
 ├── requirements.txt     # Python dependencies
 ├── knowledge_base/      # Your notes go here

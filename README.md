@@ -18,6 +18,7 @@ Built for [Obsidian](https://obsidian.md/) vaults but works with any folder of m
 
 ## What's New
 
+- **MCP Server** - use Kwipu as a tool inside Claude Desktop, Cursor, Windsurf, or any MCP-compatible agent. All processing runs locally via Ollama.
 - **Incremental updates** - editing a note no longer rebuilds the entire graph. Modified files are updated in-place in seconds.
 - **CLI model override** - switch LLM or embedding model without editing code: `--llm-model`, `--embed-model`
 - **Startup validation** - checks that Ollama is running and models are available before starting. Clear error messages with suggested commands.
